@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rated - Contact</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="home-page-rated.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <!-- Logo Animation Container -->
+        <div id="logo-animation">
+            <a href="home-page-rated.html">
+                <img src="ratedlogo.png" alt="Rated Logo" class="rotating-logo">
+            </a>
+        </div>
+
+        <!-- Hamburger Menu and Cart Icon -->
+        <div class="header-icons">
+            <div class="cart-icon" onclick="openCart()">
+                <i class="fas fa-shopping-cart"></i>
+            </div>
+            <div class="hamburger-menu" onclick="toggleMenu()">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+
+        <!-- Navigation Links (Hidden by Default) -->
+        <nav id="nav-menu">
+            <ul>
+                <li><a href="home-page-rated.html#">Home</a></li>
+                <li><a href="home-page-rated.html#shop">Shop</a></li>
+                <li><a href="about-page-rated.html">About</a></li>
+                <li><a href="contact-page-rated.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+<!-- Contact Section -->
+<section id="contact" class="contact fade-in">
+    <div class="contact-content">
+        <h2>Contact Us</h2>
+        <p>Have questions or want to collaborate? Reach out to us!</p>
+        <form class="contact-form">
+            <input type="text" placeholder="Your Name" required>
+            <input type="email" placeholder="Your Email" required>
+            <textarea placeholder="Your Message" required></textarea>
+            <button type="submit">Send Message</button>
+        </form>
+    </div>
+</section>
+
+
+    <!-- Footer -->
+    <footer class="fade-in">
+        <p>&copy; 2025 Rated. All Rights Reserved.</p>
+    </footer>
+
+    <script src="home-page-rated.js"></script>
+</body>
+</html>

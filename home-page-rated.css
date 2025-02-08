@@ -1,0 +1,699 @@
+/* General Styles */
+html, body {
+    background: linear-gradient(135deg, #111, #222);
+    color: white;
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    width: 100%;
+    scroll-behavior: smooth;
+}
+
+/* Space Travel Container */
+#space-travel {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    perspective: 1000px;
+    overflow: hidden;
+    background: black;
+    z-index: 10001;
+    opacity: 1; /* Start fully visible */
+    visibility: visible; /* Start visible */
+    transition: opacity 2s ease-in-out, visibility 2s ease-in-out; /* Smooth fade-out */
+}
+
+/* Stars Container */
+.stars-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    perspective: 1000px; /* Enable 3D perspective */
+    transform-style: preserve-3d; /* Enable 3D transformations */
+    overflow: hidden; /* Prevent stars from overflowing */
+}
+
+/* Individual Stars */
+.star {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background: white; /* Default color, overridden by JavaScript */
+    border-radius: 50%;
+    opacity: 1; /* Stars are visible immediately */
+    animation: moveStar 5s linear infinite, twinkle 1s infinite ease-in-out;
+    transform-style: preserve-3d; /* Ensure 3D transformations are applied */
+}
+
+/* Keyframes for Moving Stars (Toward the Viewer) */
+@keyframes moveStar {
+    0% {
+        transform: translate3d(var(--x), var(--y), -2000px) scale(0.2); /* Start far away and small */
+        opacity: 1; /* Stars are visible immediately */
+    }
+    50% {
+        opacity: 1; /* Maintain visibility */
+    }
+    100% {
+        transform: translate3d(var(--x), var(--y), 1000px) scale(2); /* Move closer and grow larger */
+        opacity: 0; /* Fade out as they get closer */
+    }
+}
+
+/* Keyframes for Twinkling Stars */
+@keyframes twinkle {
+    0%, 100% {
+        opacity: 0.5;
+    }
+    50% {
+        opacity: 1;
+    }
+}
+
+/* Logo Container */
+.logo-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.8);
+    text-align: center;
+    opacity: 0;
+    animation: revealLogo 3s ease-in-out 2s forwards;
+    background: transparent; /* Ensure no background */
+    margin: 0; /* Remove any default margin */
+    padding: 0; /* Remove any default padding */
+    z-index: 1; /* Ensure the logo is above the stars */
+}
+
+#space-travel.hidden .logo-container {
+    display: none; /* Hide the logo and tagline when space travel is hidden */
+}
+
+.logo-image {
+    width: 250px; /* Adjust the size as needed */
+    height: auto; /* Maintain aspect ratio */
+    background: transparent; /* Ensure no background */
+    mix-blend-mode: multiply; /* Blend the logo with the stars */
+    margin: 0; /* Remove any default margin */
+    padding: 0; /* Remove any default padding */
+}
+
+.tagline {
+    font-size: 1.5rem;
+    color: white;
+    margin: 0; /* Remove default margin */
+    padding: 0; /* Remove default padding */
+    font-family: 'Bebas Neue', sans-serif;
+    letter-spacing: 2px;
+    margin-top: -5rem; /* Adjust as needed to position the tagline */
+    opacity: 0;
+    mix-blend-mode: lighten;
+    animation: fadeIn 3s ease-in-out 3.5s forwards;
+}
+
+/* Keyframes for Revealing the Logo */
+@keyframes revealLogo {
+    0% {
+        transform: translate(-50%, -50%) scale(0.8);
+        opacity: 0;
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 1;
+    }
+}
+
+/* Keyframes for Fading in the Tagline */
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+/* Landing Screen Styles */
+#landing-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: black;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+    background: radial-gradient(circle, #000428, #000);
+}
+
+/* Logo Container */
+#landing-screen .logo-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+}
+
+/* Logo Image */
+#landing-screen .logo-image {
+    width: 150px;
+    height: auto;
+}
+
+/* Tagline */
+#landing-screen .tagline {
+    font-size: 1.2rem;
+    color: white;
+    margin: 0;
+    text-align: center;
+    font-family: 'Bebas Neue', sans-serif;
+    letter-spacing: 2px;
+    margin-top: -3rem;
+}
+
+/* Hide landing screen when scrolled */
+body.scrolled #landing-screen {
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* Logo Animation Container */
+#logo-animation {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 150px; /* Adjust based on your logo size */
+    height: auto;
+    perspective: 1000px; /* Enable 3D perspective */
+    z-index: 1000;
+}
+
+/* Rotating Logo */
+.rotating-logo {
+    width: 100%;
+    height: auto;
+    animation: rotateLogo 5s linear infinite;
+    transform-style: preserve-3d; /* Enable 3D transformations */
+}
+
+/* Keyframes for Horizontal Rotation */
+@keyframes rotateLogo {
+    0% {
+        transform: rotateY(0deg); /* Start at 0 degrees */
+    }
+    100% {
+        transform: rotateY(360deg); /* Complete a full rotation */
+    }
+}
+
+/* Header Adjustments */
+header {
+    display: flex;
+    justify-content: space-between; /* Space between logo and icons */
+    align-items: center;
+    padding: 1rem 3rem;
+    background: rgba(0, 0, 0, 0.9);
+    backdrop-filter: blur(15px);
+    position: fixed;
+    width: 95%; /* Full width */
+    top: 0;
+    left: 0;
+    z-index: 1000;
+}
+
+/* Hamburger Menu and Cart Icon Container */
+.header-icons {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    margin-left: auto; /* Push icons to the right */
+    z-index: 1001; /* Ensure it's above other elements */
+}
+
+/* Hamburger Menu */
+.hamburger-menu {
+    font-size: 2rem;
+    cursor: pointer;
+    color: white;
+    transition: color 0.3s;
+}
+
+.hamburger-menu:hover {
+    color: #888; /* Grey on hover */
+}
+
+/* Shopping Cart Icon */
+.cart-icon {
+    font-size: 2rem;
+    cursor: pointer;
+    color: white;
+    transition: color 0.3s;
+}
+
+.cart-icon:hover {
+    color: #888; /* Grey on hover */
+}
+
+/* Navigation Links (Hidden by Default) */
+nav {
+    display: none;
+    position: absolute;
+    top: 100%; /* Position below the header */
+    right: 0;
+    background: rgba(0, 0, 0, 0.9);
+    backdrop-filter: blur(15px);
+    padding: 1rem;
+    border-radius: 0.5rem;
+    z-index: 1000;
+    width: 200px; /* Set a fixed width for the dropdown */
+}
+
+nav ul {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 1.2rem;
+    transition: color 0.3s;
+    font-family: 'Bebas Neue', sans-serif;
+    letter-spacing: 1px;
+}
+
+nav a:hover {
+    color: #888; /* Grey on hover */
+}
+
+/* Show Navigation Links When Menu is Open */
+nav.active {
+    display: block;
+}
+
+/* Hero Section */
+.hero {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    text-align: center;
+    background-color: black;
+    color: white; /* Ensure text is visible */
+}
+
+.hero-text {
+    font-size: 4rem;
+    font-weight: 800;
+    margin: 0;
+    font-family: 'Bebas Neue', sans-serif;
+    letter-spacing: 4px;
+}
+
+.hero-subtext {
+    font-size: 1.5rem;
+    margin-top: 1rem;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Platinum Button Styles */
+.cta-button, .subscribe-form button {
+    background: linear-gradient(135deg, #e5e4e2 0%, #c0c0c0 50%, #e5e4e2 100%);
+    color: #333; /* Dark text for contrast */
+    border: none;
+    border-radius: 0.75rem;
+    padding: 0.75rem 2rem;
+    font-size: 1rem;
+    font-weight: bold;
+    font-family: 'Bebas Neue', sans-serif;
+    letter-spacing: 1px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden; /* Ensure the shine doesn't overflow */
+    transition: transform 0.3s, box-shadow 0.3s;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+/* Shine Effect */
+.cta-button::before, .subscribe-form button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%; /* Start the shine outside the button */
+    width: 10%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        rgba(255, 255, 255, 0.3) 0%,
+        rgba(255, 255, 255, 0) 50%,
+        rgba(255, 255, 255, 0.3) 100%
+    );
+    transition: left 0.5s; /* Animate the shine horizontally */
+    pointer-events: none; /* Ensure the shine doesn't interfere with clicks */
+}
+
+/* Hover Effects */
+.cta-button:hover, .subscribe-form button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3);
+}
+
+.cta-button:hover::before, .subscribe-form button:hover::before {
+    left: 100%; /* Move the shine across the button */
+}
+
+/* Focus Effects */
+.cta-button:focus, .subscribe-form button:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(229, 228, 226, 0.5);
+}
+
+/* Featured Products */
+.featured-products {
+    padding: 5rem 3rem;
+    background: #111;
+}
+
+.featured-products h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    font-family: 'Bebas Neue', sans-serif;
+    letter-spacing: 3px;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* 4 items per row */
+    gap: 2rem;
+}
+
+/* Product Card */
+.product-card {
+    background: transparent;
+    border: none;
+    padding: 0;
+    text-align: left;
+    transition: transform 0.3s ease-in-out;
+}
+
+.product-card:hover {
+    transform: scale(1.05); /* Slightly scale up the entire card */
+}
+
+/* Image Placeholder */
+.image-placeholder {
+    height: 250px; /* Reduced height for smaller images */
+    width: 250px;
+    overflow: hidden; /* Ensure the image doesn't overflow */
+    border-radius: 0.75rem;
+    margin-bottom: 1rem;
+    position: relative;
+}
+
+/* Product Image */
+.product-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensure the image covers the container */
+    border-radius: 0.75rem;
+    transition: transform 0.3s ease-in-out;
+}
+
+/* Hover Effect on Image */
+.product-card:hover .product-image {
+    transform: scale(1.1); /* Scale up the image on hover */
+}
+
+/* Clothing Name */
+.product-card h2 {
+    font-size: 1.25rem; /* Smaller font size for clothing name */
+    margin: 0.5rem 0 0.25rem 0; /* Adjust margins */
+    font-family: 'Bebas Neue', sans-serif;
+    letter-spacing: 2px;
+    color: white;
+    text-align: left;
+}
+
+/* Price */
+.product-card .price {
+    font-size: 1rem; /* Smaller font size for price */
+    color: rgba(255, 255, 255, 0.8);
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    text-align: left;
+}
+
+button {
+    background: linear-gradient(135deg, #e5e4e2 0%, #c0c0c0 50%, #e5e4e2 100%);
+    color: #333; /* Dark text for contrast */
+    border: none;
+    border-radius: 0.75rem;
+    padding: 0.75rem 2rem;
+    font-size: 1rem;
+    font-weight: bold;
+    font-family: 'Bebas Neue', sans-serif;
+    letter-spacing: 1px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden; /* Ensure the shine doesn't overflow */
+    transition: transform 0.3s, box-shadow 0.3s;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+button:hover {
+    background-color: #888; /* Grey on hover */
+    transform: scale(1.05);
+}
+
+/* About Section */
+.about {
+    padding: 5rem 3rem;
+    background: #222;
+    text-align: center;
+}
+
+.about h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    font-family: 'Bebas Neue', sans-serif;
+    letter-spacing: 3px;
+}
+
+.about p {
+    font-size: 1.2rem;
+    max-width: 800px;
+    margin: 0 auto;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Footer */
+footer {
+    padding: 2rem;
+    background: #000;
+    text-align: center;
+    font-size: 1rem;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Subscribe Section */
+.subscribe {
+    padding: 3rem 1rem;
+    background: #222;
+    text-align: center;
+}
+
+.subscribe h2 {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    font-family: 'Bebas Neue', sans-serif;
+    letter-spacing: 2px;
+    color: white;
+}
+
+.subscribe-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.subscribe-form input[type="email"] {
+    width: 70%;
+    padding: 0.75rem 1rem;
+    border: 2px solid rgba(229, 228, 226, 0.5);
+    border-radius: 0.75rem;
+    background: transparent;
+    color: white;
+    font-size: 0.85rem;
+    font-family: 'Poppins', sans-serif;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+.subscribe-form input[type="email"]::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.subscribe-form input[type="email"]:focus {
+    border-color: white;
+}
+
+.subscribe-form button {
+    padding: 0.75rem 2rem;
+    background-color: black;
+    color: #333;
+    border: none;
+    border-radius: 0.75rem;
+    font-size: 1rem;
+    font-weight: bold;
+    font-family: 'Bebas Neue', sans-serif;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+}
+
+/* Scroll Animation Styles */
+.fade-in {
+    opacity: 0;
+}
+
+
+.fade-in.visible {
+    opacity: 1;
+    transform: translateY(0); /* Move to original position */
+}
+
+/* About Section with Background Image */
+.about {
+    position: relative;
+    height: 800px; /* Adjust the height as needed */
+    background-image: url('background-images/about-page-photo.png'); /* Add your image path */
+    background-size: cover; /* Ensure the image covers the section */
+    background-position: center; /* Center the image */
+    background-repeat: no-repeat; /* Prevent the image from repeating */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white; /* Ensure text is visible */
+    margin-top: 5rem;
+    margin-bottom: 0rem;
+}
+
+/* Overlay to darken the background image */
+.about::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* Dark overlay for better text visibility */
+}
+
+/* About Content */
+.about-content {
+    position: relative;
+    z-index: 1; /* Ensure the text is above the overlay */
+    max-width: 800px; /* Adjust as needed */
+    padding: 0 1rem;
+}
+
+/* Contact Section with Background Image */
+.contact {
+    position: relative;
+    height: 100vh; /* Adjust the height as needed */
+    background-image: url('background-images/contact-page-photo.png'); /* Add your image path */
+    background-size: cover; /* Ensure the image covers the section */
+    background-position: center; /* Center the image */
+    background-repeat: no-repeat; /* Prevent the image from repeating */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white; /* Ensure text is visible */
+    margin-bottom: 0rem;
+    margin-top: 5rem;
+}
+
+/* Overlay to darken the background image */
+.contact::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* Dark overlay for better text visibility */
+}
+
+/* Contact Content */
+.contact-content {
+    position: relative;
+    z-index: 1; /* Ensure the text is above the overlay */
+    max-width: 800px; /* Adjust as needed */
+    padding: 0 1rem;
+}
+
+/* Contact Form Styling */
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.contact-form input,
+.contact-form textarea {
+    padding: 0.75rem;
+    border: 1px solid #ccc;
+    border-radius: 0.5rem;
+    background: rgba(255, 255, 255, 0.8); /* Semi-transparent white background */
+    color: #333; /* Dark text for contrast */
+    font-size: 1rem;
+    font-family: 'Poppins', sans-serif;
+}
+
+.contact-form textarea {
+    resize: vertical; /* Allow vertical resizing */
+}
+
+.contact-form button {
+    padding: 0.75rem 2rem;
+    background-color: #ff0077;
+    color: white;
+    border: none;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    font-weight: bold;
+    font-family: 'Bebas Neue', sans-serif;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+}
+
+.contact-form button:hover {
+    background-color: #ff5599;
+    transform: scale(1.05);
+}
+
